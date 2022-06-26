@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{selection.Name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar (ionChange)="search($event)" placeholder="Search" clearIcon></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let tour of tours" [routerLink]="'/details/' + tour.ID" routerDirection="forward">
+      <ion-thumbnail slot="start"><img src="https://ionic.andreas-dormann.de/img/small/{{tour.Image}}" /></ion-thumbnail>
+      <ion-label>
+        <h2 class="ion-text-wrap">{{tour.Title}}</h2>
+        <p>Duration: {{tour.Duration}} min</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

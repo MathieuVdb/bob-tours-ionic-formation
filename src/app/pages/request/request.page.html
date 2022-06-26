@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Request</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list>
+
+    <form [formGroup]="validationForm">
+
+      <!-- Tour info group -->
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Tour</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="https://ionic.andreas-dormann.de/img/small/{{tour.Image}}">
+          </ion-thumbnail>
+          <ion-label>
+            <h2 text-wrap>{{tour.Title}}</h2>
+            <p>Duration: {{tour.Duration}} min</p>
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
+
+      <!-- Schedule group -->
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Desired schedule</ion-label>
+        </ion-item-divider>
+
+        <!-- Date -->
+        <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime formControlName="DesiredDate" min="{{dayAfterTomorrow}}" max="{{oneYearLater}}"
+            display-format="DDD, MMMM DD YYYY" picker-format="MMMM DD YYYY"
+            placeholder="Please choose your desired date!">
+          </ion-datetime>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation
+                        of validationMessages.DesiredDate">
+            <div class="error-message" *ngIf="validationForm.get('DesiredDate')
+                 .hasError(validation.type)
+                 && (validationForm.get('DesiredDate').dirty
+                 || validationForm.get('DesiredDate').touched)">
+              <ion-icon name="flash"></ion-icon>
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Time -->
+        <ion-item>
+          <ion-label>Time</ion-label>
+          <ion-datetime formControlName="DesiredTime" hourValues="9,10,11,12,13,14,15,16,17" minuteValues="0,15,30,45"
+            display-format="hh:mm A" picker-format="h mm" placeholder="Please choose your desired time!">
+          </ion-datetime>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation
+                    of validationMessages.DesiredTime">
+            <div class="error-message" *ngIf="validationForm.get('DesiredTime')
+                 .hasError(validation.type)
+                 && (validationForm.get('DesiredTime').dirty
+                 || validationForm.get('DesiredTime').touched)">
+              <ion-icon name="flash"></ion-icon>
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+      </ion-item-group>
+
+      <!-- Language selection group -->
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Language</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>The guide should speak</ion-label>
+          <ion-select formControlName="Language" interface="popover">
+            <ion-select-option>english</ion-select-option>
+            <ion-select-option>spanish</ion-select-option>
+            <ion-select-option>chinese</ion-select-option>
+            <ion-select-option>german</ion-select-option>
+            <ion-select-option>french</ion-select-option>
+            <ion-select-option>italian</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-item-group>
+
+      <!-- Bus group (only if we have a bus trip) -->
+      <ion-item-group *ngIf="isBusTrip">
+        <ion-item-divider>
+          <ion-label>Bus</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>We need a bus.</ion-label>
+          <ion-toggle formControlName="NeedBus"></ion-toggle>
+        </ion-item>
+      </ion-item-group>
+
+      <!-- Contact information group -->
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Your contact information</ion-label>
+        </ion-item-divider>
+
+        <!-- First name -->
+        <ion-item>
+          <ion-label>First name</ion-label>
+          <ion-input formControlName="FirstName" type="text">
+          </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation
+                    of validationMessages.FirstName">
+            <div class="error-message" *ngIf="validationForm.get('FirstName')
+                 .hasError(validation.type)
+                 && (validationForm.get('FirstName').dirty
+                 || validationForm.get('FirstName').touched)">
+              <ion-icon name="flash"></ion-icon>
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Last name -->
+        <ion-item>
+          <ion-label>Last name</ion-label>
+          <ion-input formControlName="LastName" type="text">
+          </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation
+                    of validationMessages.LastName">
+            <div class="error-message" *ngIf="validationForm.get('LastName')
+                 .hasError(validation.type)
+                 && (validationForm.get('LastName').dirty
+                 || validationForm.get('LastName').touched)">
+              <ion-icon name="flash"></ion-icon>
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Email -->
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input formControlName="Email" type="email">
+          </ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation
+                                of validationMessages.Email">
+            <div class="error-message" *ngIf="validationForm.get('Email')
+                 .hasError(validation.type)
+                 && (validationForm.get('Email').dirty
+                 || validationForm.get('Email').touched)">
+              <ion-icon name="flash"></ion-icon>
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+      </ion-item-group>
+
+    </form>
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-button expand="block" type="submit" [disabled]="!validationForm.valid" (click)="send(validationForm.value)">
+    Send request
+  </ion-button>
+</ion-footer>

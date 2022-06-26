@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ currentView | titlecase }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="map" [class]="currentView==='description'"></div>
+  <div id="description" [class]="currentView!=='description'"></div>
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-segment [(ngModel)]="currentView"  (ionChange)="currentViewChanged($event)">
+    <ion-segment-button value="map">
+      <ion-label>Map</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="route">
+      <ion-label>Route</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="description">
+      <ion-label>Description</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-footer>

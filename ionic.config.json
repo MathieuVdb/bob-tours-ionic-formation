@@ -1,7 +1,8 @@
 {
   "name": "bob-tours",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

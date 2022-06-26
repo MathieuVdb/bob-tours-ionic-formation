@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Tour-Types</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let tourtype of btService.tourtypes"
+    [routerLink]="['/list',
+      {
+        Category: 'Tourtype',
+        Criteria: tourtype.ID,
+        Name: tourtype.Name
+      }]"
+      routerDirection="forward"
+      [disabled]="tourtype.Count === 0">
+      <ion-icon name="{{tourtype.Icon}}" slot="start"></ion-icon>
+      {{tourtype.Name}}
+      <ion-badge slot="end">{{tourtype.Count}}</ion-badge>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

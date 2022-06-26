@@ -1,0 +1,31 @@
+.azure-style {
+  --ion-color-primary: #1877c0; // azure
+  --ion-color-primary-rgb: 24, 119, 192; // rgb
+  --ion-color-primary-contrast: #ffffff; // contrast
+  --ion-color-primary-contrast-rgb: 255, 255, 255; // cont. rgb
+  --ion-color-primary-shade: #1569a9; // shade
+  --ion-color-primary-tint: #2f85c6; // tint
+
+  --ion-toolbar-background: var(--ion-color-primary);
+  --ion-toolbar-color: var(--ion-color-primary-contrast);
+
+  .button, ion-fab-button ion-icon {
+    color: var(--ion-color-primary-contrast);
+  }
+
+  ion-item,
+  ion-card-title,
+  ion-card-content {
+    color: var(--ion-color-primary);
+  }
+
+  ion-card-subtitle {
+    color: rgba(var(--ion-color-primary-rgb), 0.5);
+  }
+
+  ion-chip,
+  ion-chip ion-icon {
+    color: var(--ion-color-primary-contrast);
+    background-color: var(--ion-color-primary-tint);
+  }
+}
